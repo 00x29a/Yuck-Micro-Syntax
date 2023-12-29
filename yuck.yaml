@@ -1,0 +1,34 @@
+filetype: yuck
+
+detect:
+    filename: "\\.(yuck)$"
+
+rules:
+    # Comments
+    - comment:
+        start: ";"
+        end: "$"
+        rules: []
+
+    # Keywords
+    - statement: "\\b(defwidget|defwindow|defpoll|defvar|deflisten|geometry|struts|include)\\b"
+
+    # Boolean literals
+    - constant: "\\b(true|false)\\b"
+
+    # Numeric literals
+    - constant.number: "\\b[0-9]+\\b"
+
+    # Variable names (colon-prefixed)
+    - identifier: ":[\\w-]+"
+
+    # Strings (double-quoted)
+    - constant.string:
+        start: "\""
+        end: "(\"|$)"
+        skip: "\\\\."
+        rules:
+            - constant.specialChar: "\\\\."
+
+    # Brackets and braces
+    - symbol.brackets: "[\\[\\]{}]"
